@@ -6,6 +6,10 @@ import web.model.User;
 
 import java.util.List;
 
-@Repository
-public interface Dao extends JpaRepository<User, Integer> {
+public interface Dao {
+    List<User> allUsers();
+    User findUserById(int id);
+    void add(User user);
+    User update(User user);
+    void deleteById(int id);
 }

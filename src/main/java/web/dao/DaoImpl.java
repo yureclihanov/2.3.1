@@ -7,42 +7,44 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
+public class DaoImpl implements Dao  {
 
-public class DaoImpl  {
+    @PersistenceContext
+    private EntityManager entityManager;
 
-  //  @PersistenceContext
-  //  private EntityManager entityManager;
-//
-  //  @Override
-  //  @Transactional(readOnly = true)
-  //  public List<User> allUsers() {
-  //      String jpql  = "SELECT u FROM User u";
-  //      return entityManager.createQuery(jpql, User.class).getResultList();
-  //  }
-//
-  //  @Override
-  //  @Transactional(readOnly = true)
-  //  public User findUserById(int id) {
-  //      return entityManager.find(User.class, id);
-  //  }
-//
-  //  @Override
-  //  @Transactional
-  //  public void add(User user) {
-  //      entityManager.persist(user);
-  //  }
-//
-  //  @Override
-  //  @Transactional
-  //  public User update(User user) {
-  //      return entityManager.merge(user);
-  //  }
-//
-  //  @Override
-  //  @Transactional
-  //  public void deleteById(int id) {
-  //      entityManager.remove(entityManager.find(User.class, id));
-  //  }
+    @SuppressWarnings("unchecked")
+    public List<User> allUsers() {
+        TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
+        return query.getResultList();
+    }
+
+ //   @Override
+ //   public List<User> allUsers() {
+ //       String jpql  = "SELECT u FROM User u";
+ //       return entityManager.createQuery(jpql, User.class).getResultList();
+ //   }
+
+    @Override
+    public User findUserById(int id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public void add(User user) {
+        entityManager.persist(user);
+    }
+
+    @Override
+    public User update(User user) {
+        return entityManager.merge(user);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        entityManager.remove(entityManager.find(User.class, id));
+    }
 }

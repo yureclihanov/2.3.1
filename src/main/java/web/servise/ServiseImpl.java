@@ -7,11 +7,10 @@ import web.dao.Dao;
 import web.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
-public class ServiseImpl {
+@Transactional
+public class ServiseImpl implements Servise {
 
     private Dao dao;
 
@@ -20,60 +19,28 @@ public class ServiseImpl {
         this.dao = dao;
     }
 
-    public List<User> findAll() {
-        return dao.findAll();
+    @Override
+    public List<User> allUsers() {
+        return dao.allUsers();
     }
 
-    public User findOne(int id) {
-        Optional<User> user = dao.findById(id);
-        return user.orElse(null);
+    @Override
+    public User findUserById(int id) {
+        return dao.findUserById(id);
     }
 
-    @Transactional
-    public void saveUser(User user) {
-        dao.save(user);
+    @Override
+    public void add(User user) {
+        dao.add(user);
     }
 
-    @Transactional
-    public void updateUser(int id, User updateUser) {
-        updateUser.setId(id);
-        dao.save(updateUser);
+    @Override
+    public User update(User user) {
+        return dao.update(user);
     }
 
-    @Transactional
+    @Override
     public void deleteById(int id) {
         dao.deleteById(id);
     }
-
-
-    //   private final DaoImpl daoImpl;
-//
-    //   public ServiseImpl(DaoImpl daoImpl) {
-    //       this.daoImpl = daoImpl;
-    //   }
-//
-    //   @Override
-    //   public List<User> allUsers() {
-    //       return daoImpl.allUsers();
-    //   }
-//
-    //   @Override
-    //   public User findUserById(int id) {
-    //       return daoImpl.findUserById(id);
-    //   }
-//
-    //   @Override
-    //   public void add(User user) {
-    //       daoImpl.add(user);
-    //   }
-//
-    //   @Override
-    //   public User update(User user) {
-    //       return daoImpl.update(user);
-    //   }
-//
-    //   @Override
-    //   public void deleteById(int id) {
-    //       daoImpl.deleteById(id);
-    //   }
 }

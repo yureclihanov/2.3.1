@@ -17,16 +17,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${people}">
-        <td th:text="${user.getName()}"/>
-        <td th:text="${user.getLastName()}"/>
-        <td th:text="${user.getAge()}"/>
+    <tr th:each="user: ${people}">
+        <td th:text="${user.name}">Name</td>
+        <td th:text="${user.lastName}">jhj</td>
+        <td th:text="${user.age}">kjjh</td>
         <td>
-            <form th:action="@{/users/{id}/update(id=${user.getId()})}" method="get">
+            <form th:action="@{/users/{id}/update(id=${user.getId()})}" th:method="GET">
                 <input type="submit" value="Update User">
 
             </form>
-            <form action="/users" method="get">
+            <form th:action="@{/users/{id}/delete(id=${user.getId()})}" th:method="DELETE">
                 <input type="submit" value="Delete User">
 
             </form>
@@ -35,7 +35,7 @@
     </tbody>
 </table>
 <br>
-<form action="/new" method="get">
+<form th:action="@{/users/new}" th:method="GET">
     <input type="submit" value="Create new User">
 </form>
 </body>
