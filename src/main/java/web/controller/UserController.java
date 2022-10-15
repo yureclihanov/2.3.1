@@ -6,9 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.servise.Servise;
-import web.servise.ServiseImpl;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/users")
